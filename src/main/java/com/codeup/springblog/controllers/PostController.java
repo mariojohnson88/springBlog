@@ -16,11 +16,10 @@ class PostController {
         return "Posts index page!";
     }
 
-
     @GetMapping("/posts/{id}")
     @ResponseBody
     public String individualPost(@PathVariable int id) {
-        return "View an individual post from user with the id of " + id;
+        return "View an individual post of user with id " + id;
     }
 
     @GetMapping("/posts/create")
