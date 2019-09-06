@@ -19,7 +19,7 @@ public class PostController {
     @GetMapping("/posts/{id}")
     @ResponseBody
     public String individualPost(@PathVariable int id) {
-        return "View an individual post of user with id " + id;
+        return "View an post of user with id of " + id;
     }
 
     @GetMapping("/posts/create")
@@ -30,7 +30,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPosts(){
+    public String createPost(){
         return "Create a post";
     }
 
