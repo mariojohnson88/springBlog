@@ -2,34 +2,33 @@ package com.codeup.springblog.controllers;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MathController {
 
-    @GetMapping("/add/3/and/4")
+    @GetMapping("/add/{a}/and/{b}")
     @ResponseBody
-    public String addForSeven() {
-        return "7";
+    public long add(@PathVariable long a, @PathVariable long b) {
+        return a + b;
     }
 
-    @GetMapping("/subtract/3/from/10")
+    @GetMapping("/subtract/{a}/from/{b}")
     @ResponseBody
-    public String subtractForSeven() {
-        return "7";
+    public String subtract(@PathVariable long a, @PathVariable long b) {
+        return Long.toString(b - a);
     }
 
-    @GetMapping("/multiply/4/and/5")
+    @GetMapping("/multiply/{a}/and{b}")
     @ResponseBody
-    public String multiplyForTwenty() {
-        return "20";
+    public String multiply(@PathVariable String a, @PathVariable String b) {
+        return Long.toString(Long.parseLong(a) * new Long (b));
     }
 
-    @GetMapping("/divide/6/by/3")
+    @RequestMapping(path = "/divide/{a}/by{b}", method = RequestMethod.GET)
     @ResponseBody
-    public String DivideForTwo() {
-        return "2";
+    public String Divide(@PathVariable double a, @PathVariable double b) {
+        return a + " divided by " + b + " = " + (a / b);
     }
 }
 
