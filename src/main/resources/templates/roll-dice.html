@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Roll Dice</title>
+</head>
+<body>
+
+<h1>Guess a number 1-6</h1>
+
+<!--<button th:each="number : ${numbers}">-->
+<!--    <a th:href="@{'/roll-dice/' + ${number}}" th:text="${number}"></a>-->
+<!--</button>-->
+
+<div>The random number is:<span th:text="${randomNumber}"></span></div>
+<div>You're guess was number:<span th:text="${number}"></span></div>
+
+<div th:text="${match}"></div>
+<div th:if="${restart}"><a href="/roll-dice"> Roll again?</a></div>
+
+
+</body>
+</html>
