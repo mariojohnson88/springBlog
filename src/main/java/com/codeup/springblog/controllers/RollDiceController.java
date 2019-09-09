@@ -11,22 +11,14 @@ import java.util.concurrent.ThreadLocalRandom;
 @Controller
 public class RollDiceController {
 
-    @GetMapping("/roll-dice/")
+    @GetMapping("/roll-dice")
     public String diceNum(Model diceModel){
-        ArrayList<String> numbers = new ArrayList<>();
-        numbers.add("1");
-        numbers.add("2");
-        numbers.add("3");
-        numbers.add("4");
-        numbers.add("5");
-        numbers.add("6");
-        diceModel.addAttribute("numbers", numbers);
         return "roll-dice";
     }
 
     @GetMapping("/roll-dice/{n}")
     public String diceRoll(@PathVariable String n, Model diceModel) {
-        int randomNumber = ThreadLocalRandom.current().nextInt(2,6 + 1);
+        int randomNumber = ThreadLocalRandom.current().nextInt(1,6 + 1);
         String numString = String.valueOf(randomNumber);
 
         diceModel.addAttribute("randomNumber", randomNumber);
@@ -36,11 +28,9 @@ public class RollDiceController {
         if (n.equals(numString)) {
             diceModel.addAttribute("match", "Good guess!");
             diceModel.addAttribute("restart", true);
-//            return "Your number matches";
         } else if (!n.equals(numString)){
             diceModel.addAttribute("success", "Roll again?");
             diceModel.addAttribute("restart", true);
-//            return "Your number does not match";
         }
         return "roll-dice";
     }
