@@ -2,6 +2,7 @@ package com.codeup.springblog.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Posts")
@@ -19,8 +20,8 @@ public class Post {
     @OneToOne
     private User owner;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-//    private List<PostImage> images;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Image> images;
 
 //  Used to create instance of a post. Dont forget.
     public Post() {}
