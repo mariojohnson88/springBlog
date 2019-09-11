@@ -4,8 +4,9 @@ package com.codeup.springblog.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "Posts")
 public class Post {
+
     @Id @GeneratedValue
     private long id;
 
@@ -15,14 +16,21 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
+    @OneToOne
+    private User owner;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+//    private List<PostImage> images;
+
 //  Used to create instance of a post. Dont forget.
     public Post() {}
 
 //  Constructor for everything for the R of CRUD
-    public Post(long id, String title, String body) {
+    public Post(long id, String title, String body, User owner) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.owner = owner;
     }
 
     public long getId() { return id; }
@@ -45,5 +53,7 @@ public class Post {
         this.body = body;
     }
 
+    public User getOwner() { return owner; }
 
+    public void setOwner(User owner) { this.owner = owner; }
 }
