@@ -15,7 +15,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-//  Used to create instance of a post
+//  Used to create instance of a post. Dont forget.
     public Post() {}
 
 //  Constructor for everything for the R of CRUD
