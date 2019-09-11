@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header(Create)"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"/>
+
+<h1>Create a post</h1>
+
+<form th:action="@{/posts/create}" th:method="POST">
+    <h1>Title: </h1><input type="text" name="title"/>
+    <h3>Post: </h3><input type="text" name="body"/>
+    <button>Create Post</button>
+</form>
+
+<th:block th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header(Edit)"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"/>
+
+<h1>Make changes to your post</h1>
+
+<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
+    <input th:text="${title}" name="title" th:value="${post.title}"/>
+    <input th:text="${body}" name="body" th:value="${post.body}"/>
+    <button>Edit</button>
+</form>
+
+
+<th:block th:replace="fragments/footer :: footer"/>
+</body>
+</html>
