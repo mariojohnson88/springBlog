@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 
+import com.codeup.springblog.daos.UserRepository;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.daos.PostRepository;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,14 @@ public class PostController {
 
     //    This is Dependency Injection, it belongs at the top of the controller.
 private final PostRepository postDao;
+private final UserRepository userDao;
 
-public PostController(PostRepository postDao) {
+public PostController(PostRepository postDao, UserRepository userDao) {
     this.postDao =  postDao ;
+    this.userDao = userDao;
 }
+
+
 
 
    //Create post
@@ -52,11 +57,18 @@ public PostController(PostRepository postDao) {
         return "posts/index";
     }
 
+//    Show an individual by ID
+    @GetMapping("/posts/{id}")
+    public String showIndividualPost(@PathVariable long id, Model vModel) {
+    Post post = postDao.findOne(id);
+        vModel.addAttribute("post", post);
+        return "posts/show";
+    }
+
 //  Edit/update post
     @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model vModel) {
         Post post = postDao.findOne(id);
-        System.out.println(post);
         vModel.addAttribute("post", post);
         return "/posts/edit";
     }
