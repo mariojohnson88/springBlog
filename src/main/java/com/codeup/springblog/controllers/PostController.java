@@ -25,8 +25,6 @@ public PostController(PostRepository postDao, UserRepository userDao) {
 }
 
 
-
-
    //Create post
 //    This URL is essentially where the HTML page to get to.
     @GetMapping("/posts/create")

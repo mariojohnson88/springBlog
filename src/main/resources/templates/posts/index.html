@@ -11,10 +11,10 @@
 <th:block>
     <div th:each="post : ${posts}">
         <h1 th:text="${post.title}">Title</h1>
+        <img class="img" th:each="image : ${post.images}" th:src="${image.path}"/>
         <p th:text="${post.body}">Body</p>
         <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
             <button>Delete</button>
-<!--            <button><a th:href="@{'/posts/' + ${post.id} + '/edit'}"></a>Edit</button>-->
         </form>
     </div>
 </th:block>
