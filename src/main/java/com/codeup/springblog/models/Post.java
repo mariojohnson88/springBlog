@@ -27,9 +27,10 @@ public class Post {
     public Post() {}
 
 //  Constructor for everything for the R of CRUD
-    public Post(long id, String title, String body, User owner) {
+    public Post(long id, String title, List<Image> images, String body, User owner) {
         this.id = id;
         this.title = title;
+        this.images = images;
         this.body = body;
         this.owner = owner;
     }
@@ -46,15 +47,16 @@ public class Post {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
-    }
+    public List<Image> getImages() { return images; }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+    public void setImages(List<Image> images) { this.images = images; }
+
+    public String getBody() { return body; }
+
+    public void setBody(String body) { this.body = body; }
 
     public User getOwner() { return owner; }
 
     public void setOwner(User owner) { this.owner = owner; }
+
 }
