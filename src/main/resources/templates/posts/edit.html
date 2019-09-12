@@ -8,13 +8,16 @@
 
 <h1>Make changes to your post</h1>
 
-<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
-    <input th:text="${title}" name="title" th:value="${post.title}"/>
-    <input th:text="${body}" name="body" th:value="${post.body}"/>
-    <button>Edit</button>
+<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST" th:object="${post}">
+    <input type="hidden" th:field="*{owner.id}"/>
+    <input type="text" th:field="*{title}"/>
+    <br/>
+    <input type="text" th:field="*{body}"/>
+    <button class="btn btn-warning">Edit</button>
 </form>
 
 
 <th:block th:replace="fragments/footer :: footer"/>
+<th:block th:replace="fragments/bootstrap :: bootstrap"/>
 </body>
 </html>
