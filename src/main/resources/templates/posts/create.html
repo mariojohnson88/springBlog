@@ -8,12 +8,15 @@
 
 <h1>Create a post</h1>
 
-<form th:action="@{/posts/create}" th:method="POST">
-    <h1>Title: </h1><input type="text" name="title"/>
-    <h3>Post: </h3><input type="text" name="body"/>
-    <button>Create Post</button>
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    <h1>Title: </h1><input type="text" th:field="*{title}"/>
+    <br/>
+    <h3>Post: </h3><input type="text" th:field="*{body}"/>
+    <button class="btn btn-success">Create Post</button>
 </form>
 
+
 <th:block th:replace="fragments/footer :: footer"/>
+<th:block th:replace="fragments/bootstrap :: bootstrap"/>
 </body>
 </html>
