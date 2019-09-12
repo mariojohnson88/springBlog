@@ -1,10 +1,12 @@
 package com.codeup.springblog.controllers;
 
 
+import com.codeup.springblog.Services.EmailService;
 import com.codeup.springblog.daos.UserRepository;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.daos.PostRepository;
 import com.codeup.springblog.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,18 @@ public class PostController {
     //    This is Dependency Injection, it belongs at the top of the controller.
 private final PostRepository postDao;
 private final UserRepository userDao;
+private final EmailService emailService;
 
-public PostController(PostRepository postDao, UserRepository userDao) {
+public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
     this.postDao =  postDao ;
     this.userDao = userDao;
+    this.emailService = emailService;
 }
+
+
+// Using @Autowired is also a way to use Dependency Injection.
+//@Autowired
+//private EmailService emailService;
 
 
    //Create post
@@ -38,7 +47,8 @@ public PostController(PostRepository postDao, UserRepository userDao) {
         ) {
         User userDB = userDao.findOne(1L);
         postPassed.setOwner(userDB);
-        postDao.save(postPassed);
+        Post savedPost = postDao.save(postPassed);
+        emailService.prepareAndSend(savedPost, "Post Created", String.format("A post with the id %d has been posted", savedPost.getId()));
         return "redirect:/posts";
     }
 
@@ -78,4 +88,5 @@ public PostController(PostRepository postDao, UserRepository userDao) {
         postDao.delete(id);
         return "redirect:/posts";
     }
+
 }
