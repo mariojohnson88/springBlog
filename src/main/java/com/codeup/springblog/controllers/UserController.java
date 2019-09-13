@@ -21,13 +21,13 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping
+    @GetMapping("/sign-up")
     public String showSignupForm(Model vModel){
         vModel.addAttribute("user", new User());
         return "users/sign-up";
     }
 
-    @PostMapping
+    @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);

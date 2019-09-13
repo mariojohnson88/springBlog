@@ -13,10 +13,10 @@ public class User {
     @Column(nullable = false, length = 100, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 225, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
 
