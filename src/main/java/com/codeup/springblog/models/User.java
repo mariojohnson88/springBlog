@@ -27,6 +27,15 @@ public class User {
         this.password = password;
     }
 
+
+//    Copy constructor.
+    public User(User copy) {
+        id = copy.id; // This line is extremely important, must have, no question!
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
+
     public User(){}
 
     public long getId() { return id; }
