@@ -7,6 +7,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.daos.PostRepository;
 import com.codeup.springblog.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,8 @@ public PostController(PostRepository postDao, UserRepository userDao, EmailServi
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post postPassed
         ) {
-        User userDB = userDao.findOne(1L);
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userDB = userDao.findOne(userSession.getId());
         postPassed.setOwner(userDB);
         Post savedPost = postDao.save(postPassed);
         emailService.prepareAndSend(savedPost, "Post Created", String.format("A post with the id %d has been posted", savedPost.getId()));
