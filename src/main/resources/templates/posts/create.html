@@ -8,11 +8,15 @@
 
 <h1>Create a post</h1>
 
-<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    <h1>Title: </h1><input type="text" th:field="*{title}"/>
+<form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+    <h3>Title:</h3><input type="text" th:field="*{title}"/>
     <br/>
-    <h3>Post: </h3><input type="text" th:field="*{body}"/>
-    <button class="btn btn-success">Create Post</button>
+    <h3>Post:</h3><input type="text" th:field="*{body}"/>
+    <br/>
+    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
+    <br/>
+    <button class="btn btn-success">Publish Post</button>
 </form>
 
 

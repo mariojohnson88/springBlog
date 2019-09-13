@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostController {
@@ -44,14 +47,25 @@ public PostController(PostRepository postDao, UserRepository userDao, EmailServi
 
     //   This is the URL for the action in the form
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post postPassed
+    public String createPost(
+            @Valid Post post,
+            Errors validation,
+            Model vModel
         ) {
-        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userDB = userDao.findOne(userSession.getId());
-        postPassed.setOwner(userDB);
-        Post savedPost = postDao.save(postPassed);
-        emailService.prepareAndSend(savedPost, "Post Created", String.format("A post with the id %d has been posted", savedPost.getId()));
-        return "redirect:/posts";
+        if (validation.hasErrors()) {
+            vModel.addAttribute("errors", validation);
+            vModel.addAttribute("post", post);
+            System.out.println(validation);
+            return "posts/create";
+        } else {
+
+            User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User userDB = userDao.findOne(userSession.getId());
+            post.setOwner(userDB);
+            Post savedPost = postDao.save(post);
+            emailService.prepareAndSend(savedPost, "Post Created", String.format("A post with the id %d has been posted", savedPost.getId()));
+            return "redirect:/posts";
+        }
     }
 
 //  Show/read all
