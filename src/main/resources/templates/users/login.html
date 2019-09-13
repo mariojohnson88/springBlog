@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header(Login)"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"/>
+
+<h1>Log In</h1>
+
+<div th:if="${param.error}">
+    Invalid Username and Password. Please re-enter information.
+</div>
+<div th:if="${param.logout}">
+    You have successfully been logged out.
+</div>
+
+<form th:action="@{/login}" th:method="POST">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text"/>
+    <br/>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="text"/>
+    <br/>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"/>
+    <input type="sumbit" value="Log In"/>
+</form>
+
+<th:block th:replace="fragments/footer :: footer"/>
+<th:block th:replace="fragments/bootstrap :: bootstrap"/>
+</body>
+</html>
