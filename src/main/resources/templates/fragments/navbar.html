@@ -2,15 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 
-<nav class="navbar" th:fragment="navbar">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
     <ul class="list-unstyled">
         <li><a th:href="@{/posts}">Home</a></li>
         <li><a th:href="@{/contacts}">Contact Us</a></li>
         <li><a th:href="@{/about}">About</a></li>
         <li><a th:href="@{posts/create}"><form sec:authorize="isAuthenticated()" th:method="POST">Create Post</form></a></li>
-        <li><a th:href="@{/login}">Log In</a></li>
-        <li><a th:href="@{/sign-up}">Register an account</a></li>
-        <li><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="POST"><button class="btn-link btn">Logout</button></form></li>
+        <li><a th:href="@{/users-posts}"><form sec:authorize="isAuthenticated()" th:method="POST">My Posts</form></a></li>
+        <li><a th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a></li>
+        <li><a th:href="@{/sign-up}" sec:authorize="!isAuthenticated()">Register an account</a></li>
+        <li><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="POST"><button class="btn-link btn btn-danger">Logout</button></form></li>
     </ul>
 </nav>
 

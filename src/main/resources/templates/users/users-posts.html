@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="fragments/header :: main-header(Index)"/>
+    <th:block th:replace="fragments/header :: main-header('My Post')"/>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: navbar"/>
 
-<h1>Here are all members posts</h1>
+<h1>Here are all of your posts</h1>
 
 <th:block>
     <div th:each="post : ${posts}">
@@ -14,7 +14,7 @@
         <img class="img" th:each="image : ${post.images}" th:src="${image.path}"/>
         <p th:text="${post.body}">Body</p>
         <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
-<!--            <button class="btn btn-danger">Delete</button>-->
+            <button class="btn btn-danger">Delete</button>
         </form>
     </div>
 </th:block>
