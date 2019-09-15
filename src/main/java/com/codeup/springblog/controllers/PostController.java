@@ -102,7 +102,7 @@ public PostController(PostRepository postDao, UserRepository userDao, EmailServi
     @PostMapping("/posts/{id}/delete")
     public String deletePostById(@PathVariable long id){
         postDao.delete(id);
-        return "redirect:/posts";
+        return "redirect:/users-posts";
     }
 
 }
