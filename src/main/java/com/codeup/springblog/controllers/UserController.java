@@ -48,4 +48,9 @@ public class UserController {
         vModel.addAttribute("posts", posts);
         return "users/users-posts";
     }
+
+    @GetMapping("/contact-info")
+    public String showContactPage(Model vModel) {
+        return "users/contact-info";
+    }
 }

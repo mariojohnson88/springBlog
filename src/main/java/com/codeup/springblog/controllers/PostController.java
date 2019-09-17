@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -103,6 +104,19 @@ public PostController(PostRepository postDao, UserRepository userDao, EmailServi
     public String deletePostById(@PathVariable long id){
         postDao.delete(id);
         return "redirect:/users-posts";
+    }
+
+//
+    @GetMapping("/posts/ajax")
+    public String viewAllAdsWithAjax() {
+    return "posts/ajax";
+    }
+
+
+    @GetMapping("/posts.json")
+    public @ResponseBody
+    List<Post> viewAllAdsInJSONFormat() {
+        return (List<Post>) postDao.findAll();
     }
 
 }
