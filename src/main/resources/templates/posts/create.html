@@ -13,21 +13,23 @@
     <h3>Title:</h3><input type="text" th:field="*{title}"/>
     <br/>
     <br/>
-    <h3>Post:</h3><input type="text" th:field="*{body}"/>
+    <h3>Post:</h3><textarea th:rows="10" th:cols="30" th:field="*{body}"></textarea>
     <br/>
     <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
     <br/>
     <button class="btn btn-success">Publish Post</button>
 </form>
 <br/>
-<!--<form action="/fileupload" method="POST" enctype="multipart/form-data">-->
-<!--    <label for="file">Upload a picture!</label>-->
-<!--    <input id="file" name="file" type="file" />-->
-<!--    <br />-->
-<!--    <input type="submit" value="upload" />-->
-<!--</form>-->
+<form action="/fileupload" method="POST" enctype="multipart/form-data">
+    <label for="file">Upload a picture!</label>
+    <input id="file" name="file" type="file" />
+    <br />
+    <input type="submit" value="Choose FIle" />
+</form>
 
-
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script>var client = filestack.init(fileStackAPIKey);
+client.picker().open();</script>
 <th:block th:replace="fragments/footer :: footer"/>
 <th:block th:replace="fragments/bootstrap :: bootstrap"/>
 </body>
