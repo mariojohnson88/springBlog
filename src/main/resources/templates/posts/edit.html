@@ -12,8 +12,8 @@
     <input type="hidden" th:field="*{owner.id}"/>
     <input type="text" th:field="*{title}"/>
     <br/>
-    <input type="text" th:field="*{body}"/>
-    <button class="btn btn-warning">Edit</button>
+    <textarea th:rows="10" th:cols="30" th:field="*{body}"></textarea>
+    <button class="btn btn-warning">Confirm Edit</button>
 </form>
 
 

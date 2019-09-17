@@ -4,8 +4,9 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+<nav class="navbar navbar-dark bg-dark" th:fragment="navbar">
     <ul class="list-unstyled">
+        <li><img th:src="@{${'/IMG/nasa_logo.png'}}" alt="Nasa Logo"/></li>
         <li><a th:href="@{/posts}">Home</a></li>
         <li><a th:href="@{/contact-info}">Contact Us</a></li>
         <li><a th:href="@{/about}">About</a></li>
