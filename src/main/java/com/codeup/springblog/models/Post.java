@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -24,21 +25,28 @@ public class Post {
     private String body;
 
     @OneToOne
+    @JsonManagedReference
     private User owner;
+
+    private String uploadPath;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Image> images;
+
+    @Column
+    private String file;
 
 //  Used to create instance of a post. Dont forget.
     public Post() {}
 
 //  Constructor for everything for the R of CRUD
-    public Post(long id, String title, List<Image> images, String body, User owner) {
+    public Post(long id, String title, List<Image> images, String body, User owner, String file) {
         this.id = id;
         this.title = title;
         this.images = images;
         this.body = body;
         this.owner = owner;
+        this.file = file;
     }
 
     public long getId() { return id; }
@@ -65,4 +73,15 @@ public class Post {
 
     public void setOwner(User owner) { this.owner = owner; }
 
+    public String getFile() { return file; }
+
+    public void setFile(String file) { this.file = file; }
+
+    public String getUploadPath() {
+        return uploadPath;
+    }
+
+    public void setUploadPath(String uploadPath) {
+        this.uploadPath = uploadPath;
+    }
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header(Create)"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"/>
+<h1 th:text="${#authentication.principal.id}"></h1>
+<form action="/fileupload" method="POST" enctype="multipart/form-data">
+    <label for="file">Upload a picture!</label>
+    <input id="file" name="file" type="file" />
+    <br />
+    <input type="submit" value="upload" />
+</form>
+
+<th:block th:replace="fragments/footer :: footer"/>
+<th:block th:replace="fragments/bootstrap :: bootstrap"/>
+</body>
+</html>
